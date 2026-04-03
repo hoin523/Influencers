@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Read(//d/tmp/**)",
+      "Bash(rm -f /tmp/codex-oh-err-*.txt /tmp/gstack-codex-oh-*.txt)",
+      "Bash(start https://www.youtube.com/watch?v=rWUWfj_PqmM)",
+      "Bash(start https://www.youtube.com/watch?v=CKvo_kQbakU)",
+      "Bash(start https://www.youtube.com/watch?v=IACHfKmZMr8)",
+      "Bash(~/.claude/skills/gstack/bin/gstack-learnings-log '{\"skill\":\"office-hours\",\"type\":\"operational\",\"key\":\"bun-not-installed-windows\",\"insight\":\"Windows 환경에서 gstack upgrade 시 bun이 설치되어 있지 않으면 ./setup이 실패함. browse binary가 이전 버전에서 남아있으면 기능은 작동하지만 새 버전 빌드는 안 됨.\",\"confidence\":8,\"source\":\"observed\"}')",
+      "Bash(mkdir:*)",
+      "Bash(pip install:*)",
+      "Bash(python -m pytest tests/ -v)",
+      "Bash(python -m pytest tests/test_api.py -v)",
+      "Bash(python -c \"import torch; print\\(f'CUDA: {torch.cuda.is_available\\(\\)}'\\); print\\(f'GPU: {torch.cuda.get_device_name\\(0\\) if torch.cuda.is_available\\(\\) else \\\\\"None\\\\\"}'\\); print\\(f'VRAM: {torch.cuda.get_device_properties\\(0\\).total_mem / 1024**3:.1f}GB' if torch.cuda.is_available\\(\\) else 'No GPU'\\)\")",
+      "Bash(nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader)",
+      "Bash(powershell.exe:*)",
+      "Bash(timeout 10 python -c ':*)",
+      "Bash(python -c \"import uvicorn; uvicorn.run\\('main:app', host='0.0.0.0', port=8000\\)\")",
+      "Bash(curl -s http://localhost:8000/personas)",
+      "Bash(python -m json.tool)",
+      "Bash(python -c ':*)",
+      "Bash(PYTHONIOENCODING=utf-8 python:*)"
+    ]
+  }
+}

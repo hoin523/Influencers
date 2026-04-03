@@ -1,0 +1,101 @@
+{
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 0,
+      "steps": 30,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "denoise": 1.0,
+      "model": ["15", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["5", 0]
+    }
+  },
+  "4": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "v1-5-pruned-emaonly.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 512,
+      "height": 768,
+      "batch_size": 1
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{{POSITIVE_PROMPT}}",
+      "clip": ["4", 1]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "{{NEGATIVE_PROMPT}}",
+      "clip": ["4", 1]
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["4", 2]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "influencer",
+      "images": ["8", 0]
+    }
+  },
+  "10": {
+    "class_type": "IPAdapterFaceID",
+    "inputs": {
+      "model": ["4", 0],
+      "ipadapter": ["11", 0],
+      "image": ["13", 0],
+      "insightface": ["12", 0],
+      "weight": 0.85,
+      "weight_faceidv2": 0.85,
+      "weight_type": "linear",
+      "start_at": 0.0,
+      "end_at": 1.0
+    }
+  },
+  "11": {
+    "class_type": "IPAdapterModelLoader",
+    "inputs": {
+      "ipadapter_file": "ip-adapter-faceid-plusv2_sd15.bin"
+    }
+  },
+  "12": {
+    "class_type": "InsightFaceLoader",
+    "inputs": {
+      "provider": "CUDA"
+    }
+  },
+  "13": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "{{REFERENCE_FACE}}"
+    }
+  },
+  "15": {
+    "class_type": "LoraLoader",
+    "inputs": {
+      "model": ["10", 0],
+      "clip": ["4", 1],
+      "lora_name": "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+      "strength_model": 0.85,
+      "strength_clip": 1.0
+    }
+  }
+}
